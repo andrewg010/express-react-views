@@ -55,8 +55,9 @@ function createEngine(engineOptions) {
     if (engineOptions.transformViews && !registered) {
       // Passing a RegExp to Babel results in an issue on Windows so we'll just
       // pass the view path.
+      const only = options.settings.views ? {only: [].concat(options.settings.views)} : {}
       require('@babel/register')(
-        assign({only: [].concat(options.settings.views)}, engineOptions.babel)
+        assign(only, engineOptions.babel)
       );
       registered = true;
     }
